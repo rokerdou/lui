@@ -22,6 +22,7 @@ public class LuiView extends FrameLayout {
 	/**
 	 * @param args
 	 */
+	
 	@Override
 	public void addView(View child) {
 		// TODO Auto-generated method stub

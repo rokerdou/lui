@@ -17,4 +17,15 @@ public class PageController {
 		
 		
 	}
+	public void start()
+	{
+		
+		StackPage.push(CreateNewPage("main"));
+	}
+	public Page CreateNewPage(String name)
+	{
+		Page page = new Page(name);
+		return page;
+		
+	}
 }

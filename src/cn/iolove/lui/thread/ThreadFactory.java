@@ -5,9 +5,9 @@ public class ThreadFactory {
 	/**
 	 * @param args
 	 */
-	public WorkThread getWorkThread()
+	public static WorkThread getWorkThread()
 	{
-		return null;
+		return new WorkThread();
 		
 	}
 
