@@ -114,6 +114,8 @@ public final class WidgetFactory {
 	{
 	
 		register("view", cn.iolove.lui.widget.ViewWidget.class, cn.iolove.lui.model.ViewModel.class);
+		register("button", cn.iolove.lui.widget.ButtonWidget.class, cn.iolove.lui.model.ButtonModel.class);
+
 	}
 
 }

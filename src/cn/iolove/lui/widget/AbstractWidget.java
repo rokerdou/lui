@@ -21,7 +21,16 @@ public  abstract class AbstractWidget {
 		
 	}
 	
-	protected abstract AbstractWidget findWidget(String ids);
+	protected AbstractWidget findWidget(String ids) {
+		if(ids.equals(id)) return this;
+		return null;
+	}
+	public void  Refresh()
+	{
+		loadModel();
+	}
+
+	
 
 
 

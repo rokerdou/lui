@@ -7,7 +7,7 @@ end
 function onCreated()
     
 	local root = view{id="1",marginleft="0%",margintop="0%",width="100%",height="500%",backgroundcolor="#debbff"}
-    root:addChild(view{id="2",marginleft="0%",margintop="0%",width="30%",height="500%",backgroundcolor="#eeccff",
+    root:addChild(button{id="2",text="按钮",marginleft="0%",margintop="0%",width="30%",height="500%",backgroundcolor="#eeccff",
     onclick="Onclick"})
 
    -- root:addChild(subb)

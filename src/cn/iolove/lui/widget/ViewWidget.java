@@ -19,6 +19,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
 
 public class ViewWidget extends AbstractWidget {
+	
 	public ViewWidget(UIModel m) {
 		super(m);
 		lv = new LuiView(RuntimeContext.getInstance().rl.getActivityContext());
@@ -64,21 +65,25 @@ public class ViewWidget extends AbstractWidget {
 		return null;
 		
 	}
+	public void  Refresh()
+	{
+		loadModel();
+		int i=0;
+		for(i=0;i<subitems.size();i++)
+		{
+			AbstractWidget child = subitems.get(i);
+
+				 child.Refresh();
+		
+			
+		}
+		
+	}
 
 	@Override
 	protected void loadModel() {
-			int x=model.getMarginleft();
-			int y = model.getMargintop();
-			int w= model.getWidth();
-			int h=model.getHeight();
-	       lv.layout(x, y, x+w, y+h);
-	       MarginLayoutParams margin=new MarginLayoutParams(w,h); 
-	       margin.setMargins(x,y, x+w, y+h); 
-	       FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin); 
-	       lv.setLayoutParams(layoutParams); 
-	       Log.i("System.err", id+"/marginleft: "+x);
-	       Log.i("System.err", id+"/margintop: "+y);
-	       lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
+
+		WidgetUtils.loadModel(model, this);
 	       
 		
 	}
