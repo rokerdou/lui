@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 			
 			
 			public void setView(View v) {
-				RelativeLayout root = new RelativeLayout(co);
+				LuiView	 root = new LuiView(co);
 				root.addView(v);
 				setContentView(root);
 				

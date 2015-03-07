@@ -57,7 +57,7 @@ public final class WidgetFactory {
 				AbstractWidget child = createWidgetTree(childData);
 				child.getModel().setWidget(root, 1);
 				((ViewWidget)root).addChild(child);
-				Log.i("System.err", root.getModel().getValueByKey("id"));
+				Log.i("System.err", child.getModel().getValueByKey("id"));
 			}
 			
 		}

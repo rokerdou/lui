@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.FrameLayout;
 
 public class ViewWidget extends AbstractWidget {
 	public ViewWidget(UIModel m) {
@@ -73,8 +74,10 @@ public class ViewWidget extends AbstractWidget {
 	       lv.layout(x, y, x+w, y+h);
 	       MarginLayoutParams margin=new MarginLayoutParams(w,h); 
 	       margin.setMargins(x,y, x+w, y+h); 
-	       LayoutParams layoutParams = new LayoutParams(margin); 
+	       FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin); 
 	       lv.setLayoutParams(layoutParams); 
+	       Log.i("System.err", id+"/marginleft: "+x);
+	       Log.i("System.err", id+"/margintop: "+y);
 	       lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
 	       
 		
