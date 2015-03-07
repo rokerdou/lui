@@ -28,6 +28,10 @@ public List getChild()
 {
 	return subitems;
 }
+public void addAttrs(String key,String v)
+{
+	hm.put(key, v);
+}
 public String toString()
 {
 	String str = new String();

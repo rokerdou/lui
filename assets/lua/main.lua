@@ -6,10 +6,10 @@ function Onclick()
 end
 function onCreated()
     
-	local root = view{Marginleft="0%",Margintop="0%",Width="100%",Height="100%",BackgroundColor="#ddeeff"}
-    local subb = EditText{Id="edit",Marginleft="30%",Margintop="2%",Width="60%",Height="5%",BackgroundColor="#ffffff"}
-    root:addChild(Button{Text="提交",Marginleft="30%",Margintop="30%",Width="40%",Height="5%",BackgroundColor="#eeccff",
-    Onclick="Onclick"})
+	local root = view{id="1",marginleft="0%",margintop="0%",width="100%",height="500%",backgroundcolor="#debbff"}
+    local subb = view{id="3",marginleft="60%",margintop="0%",width="20%",height="500%",backgroundcolor="#cccccc"}
+    root:addChild(view{id="2",marginleft="30%",margintop="0%",width="20%",height="500%",backgroundcolor="#eeccff",
+    onclick="Onclick"})
 
     root:addChild(subb)
     

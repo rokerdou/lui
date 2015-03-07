@@ -63,6 +63,12 @@ public class LuaHelper {
 		mLuaState.pushJavaObject(obj);
 		mLuaState.setGlobal(name);
 	}
+	public static LuaData toLuaDataByLuaScript(LuaState l,LuaObject obj)
+	{
+		LuaObject rs;
+		rs = (excuteLuaFunction(l,"table2json",new Object[]{obj},1))[0];
+		return Utils.getMap4Json(rs.getString());
+	}
 	public static LuaData loadScript(LuaState l,String pagename)
 	{
 	
@@ -85,6 +91,7 @@ public class LuaHelper {
 			rs.getString();
 			Log.i("lui", "get luaUIJson :" +rs.getString());
 			//RuntimeContext.getInstance().showLuaError(rs.getString());
+			return Utils.getMap4Json(rs.getString());
 			
 		}
 

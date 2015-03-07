@@ -3,23 +3,28 @@ package cn.iolove.lui.context;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
+import cn.iolove.domain.Device;
+import cn.iolove.lui.controller.PageController;
 import cn.iolove.lui.lua.LuaHelper;
 import cn.iolove.lui.thread.Method;
 import cn.iolove.lui.thread.ThreadFactory;
 import cn.iolove.lui.view.LuiView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 public class RuntimeContext {
 	public static Context context;
 	private RuntimeContext(){};
 	private static RuntimeContext obj = new RuntimeContext();
 	public  interface RuntimeContextListener{
-		public abstract void setView(LuiView v);
+		public abstract void setView(View v);
 		public abstract void RunOnUiThread(final Runnable runnable );
-		public abstract Context getActivityContext();
+		public abstract Activity getActivityContext();
 		
 		
 	}
@@ -36,25 +41,38 @@ public class RuntimeContext {
 	{
 		context=cont;
 		rl=cb;
+		
+		Device.getInstance().setScreenWidthAndHeight(rl.getActivityContext().getWindowManager().getDefaultDisplay().getWidth(),rl.getActivityContext().getWindowManager().getDefaultDisplay().getHeight());
+
+
 		//cb.setView(v);
 		start();
 		
 	}
 	public static void start()
 	{
-		runOnWorkThread(ThreadFactory.getWorkThread().setMehod(new Method() {
+		runOnWorkThread(ThreadFactory.getWorkThread((new Method() {
 			
 			@Override
 			public void Work() {
 			
-				LuaState	mLuaState = LuaStateFactory.newLuaState();
+				PageController.getInstance().start();
+				
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+
+						rl.setView((PageController.getInstance().getTopPage().getRootView()));
 			
-		    	mLuaState.openLibs();
+					}
+				});
+				
 		   
-		    	LuaHelper.loadScript(mLuaState, "main");
+		    	
 				
 			}
-		}));
+		})));
 	}
 	public static void  runOnWorkThread(Thread action)
 	{

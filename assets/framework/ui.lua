@@ -14,7 +14,7 @@ end
 function view(args)
     local m = {}
     setmetatable(m, View)
-    m.qName = "View"
+    m.qName = "view"
     if args then
     	for k,v in pairs(args) do
     		m[k] = v
@@ -22,9 +22,9 @@ function view(args)
     end
     return m
 end
-function EditText(args)
+function edittext(args)
     local m = {}
-    m.qName = "EditText"
+    m.qName = "edittext"
     m.height = 44
     if args then
     	for k,v in pairs(args) do
@@ -33,9 +33,9 @@ function EditText(args)
     end
     return m
 end
-function Button(args)
+function button(args)
     local m = {}
-    m.qName = "Button"
+    m.qName = "button"
     m.height = 44
     if args then
     	for k,v in pairs(args) do

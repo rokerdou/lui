@@ -5,9 +5,11 @@ public class ThreadFactory {
 	/**
 	 * @param args
 	 */
-	public static WorkThread getWorkThread()
+	public static WorkThread getWorkThread(Method m)
 	{
-		return new WorkThread();
+		WorkThread obj = new WorkThread();
+		obj.setMehod(m);
+		return obj;
 		
 	}
 

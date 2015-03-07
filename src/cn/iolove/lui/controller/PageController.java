@@ -8,13 +8,18 @@ public class PageController {
 	private PageController()
 	{};
 	private static PageController obj = new PageController();
-	public PageController getInstance(){return obj;}
+	public static PageController getInstance(){return obj;}
 	private static Stack<Page>  StackPage = new Stack<Page>() ;
 
 	public static interface PageControolerCallback 
 	{
 		public abstract void  pushPage(LuiView v);
 		
+		
+	}
+	public Page getTopPage()
+	{
+		return StackPage.peek();
 		
 	}
 	public void start()

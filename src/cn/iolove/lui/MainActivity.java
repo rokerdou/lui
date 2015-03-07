@@ -8,20 +8,32 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.view.Menu;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
+	private Activity co = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		final Context co = this;
-		
+	//	setContentView(R.layout.activity_main);
+		//final 
+		/*
+		 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+				 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+				 */
+		 
 		RuntimeContext.init(getApplicationContext(),new RuntimeContextListener() {
 			
 			
-			public void setView(LuiView v) {
-				setContentView(v);
+			public void setView(View v) {
+				RelativeLayout root = new RelativeLayout(co);
+				root.addView(v);
+				setContentView(root);
 				
 			}
 
@@ -33,7 +45,7 @@ public class MainActivity extends Activity {
 
 
 			@Override
-			public Context getActivityContext() {
+			public Activity getActivityContext() {
 				// TODO Auto-generated method stub
 				return co;
 			}
