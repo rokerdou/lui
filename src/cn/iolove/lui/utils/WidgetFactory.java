@@ -9,6 +9,7 @@ import android.util.Log;
 import cn.iolove.domain.LuaData;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.UIModel;
+import cn.iolove.lui.service.LuaService;
 import cn.iolove.lui.widget.AbstractWidget;
 import cn.iolove.lui.widget.ViewWidget;
 
@@ -57,7 +58,7 @@ public final class WidgetFactory {
 				AbstractWidget child = createWidgetTree(childData);
 				child.getModel().setWidget(root, 1);
 				((ViewWidget)root).addChild(child);
-				Log.i("System.err", child.getModel().getValueByKey("id"));
+			//	Log.i("System.err", child.getModel().getValueByKey("id"));
 			}
 			
 		}
@@ -83,7 +84,7 @@ public final class WidgetFactory {
 			e.printStackTrace();
 			
 			
-			throw new IllegalArgumentException("creating Widget failed!");
+			//throw new IllegalArgumentException("creating Widget failed!");
 		}
 		return widget;
 		
@@ -98,6 +99,7 @@ public final class WidgetFactory {
 		try {
 			cons = c.getConstructor(params);
 			UIModel model = (UIModel)cons.newInstance(paray);
+			
 			return model;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

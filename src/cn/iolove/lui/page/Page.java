@@ -10,9 +10,10 @@ import cn.iolove.lui.service.LuaService;
 import cn.iolove.lui.view.LuiView;
 import cn.iolove.lui.widget.AbstractWidget;
 
-public class Page {
+public class Page implements PageCircle {
 	private AbstractWidget root;
 	private LuaState luastate;
+	private String pagename;
 
 	/**
 	 * @param args
@@ -20,18 +21,39 @@ public class Page {
 	public Page(String name)
 	{
 		LuaState	mLuaState = LuaStateFactory.newLuaState();
+		pagename=name;
 		
     	mLuaState.openLibs();
     	luastate=mLuaState;
-    	root = LuaService.getInstance().getWidget(LuaHelper.loadScript(mLuaState,name));
+    
 	}
 	public LuaState getState()
 	{
 		return luastate;
 	}
+	public void Refresh()
+	{
+		
+		root.Refresh();
+	}
 	public LuiView getRootView()
 	{
 		return (LuiView) root.getInnerView();
+	}
+	@Override
+	public void Oncreate() {
+		// TODO Auto-generated method stub
+		root = LuaService.getInstance().getWidget(LuaHelper.loadScript(luastate,pagename));
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void OnFronted() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,5 +1,6 @@
 package cn.iolove.lui.lua;
 
+import org.keplerproject.luajava.JavaFunction;
 import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaObject;
 import org.keplerproject.luajava.LuaState;
@@ -30,7 +31,7 @@ public class LuaHelper {
 			int status = l.pcall(args.length, returnnumber, 0);
 			if(status!=0)
 			{
-				throw new LuaException("");
+				throw new LuaException(l.toString(-1));
 			}
 			LuaObject[] returns = new  LuaObject[returnnumber];
 			for(i=-1;i>=(0-returnnumber);i--)
@@ -61,6 +62,7 @@ public class LuaHelper {
 		//mLuaState.pushObjectValue(obj);
 		
 		mLuaState.pushJavaObject(obj);
+
 		mLuaState.setGlobal(name);
 	}
 	public static LuaData toLuaDataByLuaScript(LuaState l,LuaObject obj)

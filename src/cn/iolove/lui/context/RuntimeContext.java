@@ -4,8 +4,9 @@ import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
 import cn.iolove.domain.Device;
-import cn.iolove.lui.controller.PageController;
+
 import cn.iolove.lui.lua.LuaHelper;
+import cn.iolove.lui.service.PageService;
 import cn.iolove.lui.thread.Method;
 import cn.iolove.lui.thread.ThreadFactory;
 import cn.iolove.lui.view.LuiView;
@@ -56,14 +57,14 @@ public class RuntimeContext {
 			@Override
 			public void Work() {
 			
-				PageController.getInstance().start();
+				PageService.getInstance().start();
 				
 				runOnUiThread(new Runnable() {
 					
 					@Override
 					public void run() {
 
-						rl.setView((PageController.getInstance().getTopPage().getRootView()));
+						rl.setView((PageService.getInstance().getTopPage().getRootView()));
 			
 					}
 				});
