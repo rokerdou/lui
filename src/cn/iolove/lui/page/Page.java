@@ -1,5 +1,6 @@
 package cn.iolove.lui.page;
 
+import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
@@ -41,7 +42,7 @@ public class Page implements PageCircle {
 		return (LuiView) root.getInnerView();
 	}
 	@Override
-	public void Oncreate() {
+	public void Oncreate() throws LuaException {
 		// TODO Auto-generated method stub
 		root = LuaService.getInstance().getWidget(LuaHelper.loadScript(luastate,pagename));
 	}

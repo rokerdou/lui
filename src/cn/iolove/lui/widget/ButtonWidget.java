@@ -45,7 +45,7 @@ public class ButtonWidget extends AbstractWidget {
 				public void onClick(View button) {
 					LuaService.getInstance().excuteLuaFunctionCallBack(bm.Onclick, new Object[]{}, 0);
 					
-					Log.i("System.err", "¥•∑¢¡À");
+					
 				}
 			});
 		}

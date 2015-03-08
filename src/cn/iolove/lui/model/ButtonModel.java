@@ -13,5 +13,9 @@ public class ButtonModel extends UIModel {
 
 		// TODO Auto-generated constructor stub
 	}
+	public void setText(String texts)
+	{
+		text=texts;
+	}
 
 }

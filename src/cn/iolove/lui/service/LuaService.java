@@ -1,5 +1,6 @@
 package cn.iolove.lui.service;
 
+import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaObject;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
@@ -35,6 +36,10 @@ public void init()
 	pushGlobalObject("Log",new log());
 	
 }
+public void error()
+{
+	RuntimeContext.showLuaError(getLuaState().toString(-1));
+}
 public LuaState getLuaState()
 {
 	return PageService.getInstance().getTopPage().getState();
@@ -43,13 +48,23 @@ public void pushGlobalObject(String name,Object obj)
 {
 	LuaHelper.setGlobalObject(getLuaState(), name, obj);
 }
+public void removeGlobalObject(String name)
+{
+	LuaHelper.removeGlobalObject(getLuaState(), name);
+}
 public void excuteLuaFunctionCallBack(final String mehodName,final Object[] args,final int returnnumber)
 {
 	RuntimeContext.runOnWorkThread(ThreadFactory.getWorkThread(new Method() {
 		
 		@Override
 		public void Work() {
-			LuaHelper.excuteLuaFunction(PageService.getInstance().getTopPage().getState(), mehodName, args, returnnumber);
+			try {
+				LuaHelper.excuteLuaFunction(PageService.getInstance().getTopPage().getState(), mehodName, args, returnnumber);
+			} catch (LuaException e) {
+				// TODO Auto-generated catch block
+				RuntimeContext.showLuaError(e.getMessage());
+				e.printStackTrace();
+			}
 			RuntimeContext.runOnUiThread(new Runnable() {
 				
 				@Override
@@ -67,7 +82,7 @@ public AbstractWidget getWidget(LuaData data)
 	
 	return WidgetFactory.createWidgetTree(data);
 }
-public AbstractWidget getWidget(LuaObject obj)
+public AbstractWidget getWidget(LuaObject obj) throws LuaException
 {
 	LuaData data =	LuaHelper.toLuaDataByLuaScript(getLuaState(), obj);
 	return WidgetFactory.createWidgetTree(data);

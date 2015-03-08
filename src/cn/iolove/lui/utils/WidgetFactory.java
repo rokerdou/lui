@@ -69,6 +69,7 @@ public final class WidgetFactory {
 	public static AbstractWidget createWidget(LuaData data)
 	{
 		
+		Log.i("System.err","qNmae  "+ data.getAttrs().get("qName").toString());
 		Class c = getWidgetClass(data.getAttrs().get("qName").toString());
 		
 		Class [] params={UIModel.class};
@@ -82,6 +83,8 @@ public final class WidgetFactory {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LuaService.getInstance().error();
+			
 			
 			
 			//throw new IllegalArgumentException("creating Widget failed!");

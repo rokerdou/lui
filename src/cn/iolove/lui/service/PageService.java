@@ -2,6 +2,8 @@ package cn.iolove.lui.service;
 
 import java.util.Stack;
 
+import org.keplerproject.luajava.LuaException;
+
 import cn.iolove.lui.page.Page;
 
 import cn.iolove.lui.view.LuiView;
@@ -28,7 +30,7 @@ public class PageService {
 		return StackPage.peek();
 		
 	}
-	public void start()
+	public void start() throws LuaException
 	{
 		
 		StackPage.push(CreateNewPage("main"));

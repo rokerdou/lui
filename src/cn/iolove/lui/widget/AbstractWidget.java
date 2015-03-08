@@ -2,6 +2,7 @@ package cn.iolove.lui.widget;
 
 import cn.iolove.lui.model.UIModel;
 import cn.iolove.lui.service.LuaService;
+import android.util.Log;
 import android.view.View;
 
 public  abstract class AbstractWidget {
@@ -22,6 +23,7 @@ public  abstract class AbstractWidget {
 		if(id!=null)
 		{
 			LuaService.getInstance().pushGlobalObject(id, model);
+			Log.i("lui", "add "+id);
 		}
 		
 	}

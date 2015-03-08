@@ -13,7 +13,7 @@ import cn.iolove.lui.utils.Utils;
 
 public class LuaHelper {
 
-	public  synchronized static LuaObject[] excuteLuaFunction(LuaState ls ,String mehodName,Object[] args,int returnnumber)
+	public  synchronized static LuaObject[] excuteLuaFunction(LuaState ls ,String mehodName,Object[] args,int returnnumber) throws LuaException
 	{
 		LuaState l = ls.newThread();
 		
@@ -31,7 +31,8 @@ public class LuaHelper {
 			int status = l.pcall(args.length, returnnumber, 0);
 			if(status!=0)
 			{
-				throw new LuaException(l.toString(-1));
+				RuntimeContext.showLuaError(l.dumpStack()+l.toString(-1));
+				
 			}
 			LuaObject[] returns = new  LuaObject[returnnumber];
 			for(i=-1;i>=(0-returnnumber);i--)
@@ -41,19 +42,20 @@ public class LuaHelper {
 			}
 			
 			l.setTop(top);
+			l.checkStack(20);
+			
 			return returns; 
 			
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			RuntimeContext.showLuaError(l.toString(-1));
+			throw new LuaException(l.toString(-1));
 			
 		}finally
 		{
 			l.setTop(top);
 			
 		}
-		return null;
 		
 	}
 	public static void setGlobalObject(LuaState mLuaState,String name,Object obj)
@@ -62,27 +64,41 @@ public class LuaHelper {
 		//mLuaState.pushObjectValue(obj);
 		
 		mLuaState.pushJavaObject(obj);
+		
 
 		mLuaState.setGlobal(name);
 	}
-	public static LuaData toLuaDataByLuaScript(LuaState l,LuaObject obj)
+	public static void removeGlobalObject(LuaState mLuaState,String name)
+	{
+		mLuaState.pushNil();
+		//mLuaState.pushJavaObject(null);
+		
+
+		mLuaState.setGlobal(name);
+		Log.i("lui", "È¥³ý"+name);
+		
+		
+	}
+	
+	public static LuaData toLuaDataByLuaScript(LuaState l,LuaObject obj) throws LuaException
 	{
 		LuaObject rs;
 		rs = (excuteLuaFunction(l,"table2json",new Object[]{obj},1))[0];
 		return Utils.getMap4Json(rs.getString());
+		
 	}
-	public static LuaData loadScript(LuaState l,String pagename)
+	public static LuaData loadScript(LuaState l,String pagename) throws LuaException
 	{
 	
-		int error = l.LdoString(Utils.loadAssetsString("framework/ui.lua",RuntimeContext.context)+Utils.loadAssetsString("lua/"+pagename+".lua",RuntimeContext.context));
+		int error = l.LdoString(Utils.loadAssetsString("lua/"+pagename+".lua",RuntimeContext.context));
 		if(error!=0)
 		{
-			RuntimeContext.showLuaError(l.toString(-1));
-			RuntimeContext.showLuaError(l.dumpStack());
 			
+			throw new LuaException(l.toString(-1));
 
 		}
 		LuaObject obj = (excuteLuaFunction(l,"onCreated",new Object[]{},1))[0];
+		Log.i("lui", "get luaUIJson :" +obj.toString());
 		LuaObject rs;
 
 		
@@ -93,9 +109,10 @@ public class LuaHelper {
 			rs.getString();
 			Log.i("lui", "get luaUIJson :" +rs.getString());
 			//RuntimeContext.getInstance().showLuaError(rs.getString());
-			return Utils.getMap4Json(rs.getString());
+			return Utils.getMap4Json(new String(rs.getString()));
 			
 		}
+		
 
 		
 		return null;

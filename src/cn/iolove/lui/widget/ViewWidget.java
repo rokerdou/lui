@@ -3,6 +3,7 @@ package cn.iolove.lui.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaObject;
 
 import cn.iolove.lui.context.RuntimeContext;
@@ -30,10 +31,27 @@ public class ViewWidget extends AbstractWidget {
 
 	private LuiView lv;
 	protected List<AbstractWidget> subitems=new ArrayList<AbstractWidget>();
-	public void addChild(LuaObject obj)
+	public void _LUA_addChild(LuaObject obj) 
 	{
-		AbstractWidget childWidget = LuaService.getInstance().getWidget(obj);
-		addChild(childWidget);
+		final AbstractWidget childWidget;
+		try {
+			childWidget = LuaService.getInstance().getWidget(obj);
+			childWidget.model.parentwidget=this;
+			RuntimeContext.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					addChild(childWidget);
+					
+				}
+			});
+		
+		} catch (LuaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			RuntimeContext.showLuaError(e.getMessage());
+		}
+		
 	}
 	
 	public void addChild(AbstractWidget child)
@@ -63,6 +81,32 @@ public class ViewWidget extends AbstractWidget {
 			
 		}
 		return null;
+		
+	}
+	public void _LUA_removeChild(final String id)
+	{
+		final AbstractWidget w =findWidget(id);
+		if(w!=null)
+		{
+			RuntimeContext.runOnUiThread(new Runnable() {
+				
+				@Override
+				public void run() {
+					((ViewWidget)(w.getModel().getParenWidget())).removeChild(w);
+					LuaService.getInstance().removeGlobalObject(id);
+				
+				}
+			});
+			
+			
+		}
+		else
+		RuntimeContext.showLuaError("not "+id +" widget");
+	}
+	protected void removeChild(AbstractWidget w)
+	{
+		subitems.remove(w);
+		lv.removeView(w.getInnerView());
 		
 	}
 	public void  Refresh()

@@ -1,5 +1,6 @@
 package cn.iolove.lui.context;
 
+import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
@@ -14,6 +15,8 @@ import cn.iolove.lui.view.LuiView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -57,17 +60,24 @@ public class RuntimeContext {
 			@Override
 			public void Work() {
 			
-				PageService.getInstance().start();
-				
-				runOnUiThread(new Runnable() {
-					
-					@Override
-					public void run() {
+				try {
+					PageService.getInstance().start();
+					runOnUiThread(new Runnable() {
+						
+						@Override
+						public void run() {
 
-						rl.setView((PageService.getInstance().getTopPage().getRootView()));
-			
-					}
-				});
+							rl.setView((PageService.getInstance().getTopPage().getRootView()));
+				
+						}
+					});
+				} catch (LuaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					showLuaError(e.getMessage());
+				}
+				
+				
 				
 		   
 		    	
@@ -93,8 +103,18 @@ public class RuntimeContext {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				new AlertDialog.Builder(rl.getActivityContext()).setTitle("LUA´íÎó").setMessage(str).setPositiveButton("È·¶¨", null).show();
-			
+			AlertDialog.Builder	alert = new AlertDialog.Builder(rl.getActivityContext());
+			alert.setTitle("LUA´íÎó");
+			alert.setMessage(str);
+			alert.setPositiveButton("ok", new OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					arg0.dismiss();
+					
+				}
+			});
+			alert.show();
 			}
 		});
 		
