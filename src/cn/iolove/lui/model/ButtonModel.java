@@ -5,6 +5,7 @@ import cn.iolove.domain.LuaData;
 public class ButtonModel extends UIModel {
 	public String text=null;
 	public String Onclick=null;
+	
 
 	public ButtonModel(LuaData data) {
 		super(data);

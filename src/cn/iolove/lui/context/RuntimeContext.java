@@ -76,12 +76,7 @@ public class RuntimeContext {
 					e.printStackTrace();
 					showLuaError(e.getMessage());
 				}
-				
-				
-				
-		   
-		    	
-				
+						
 			}
 		})));
 	}

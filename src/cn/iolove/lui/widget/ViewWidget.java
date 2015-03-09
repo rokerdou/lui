@@ -108,6 +108,7 @@ public class ViewWidget extends AbstractWidget {
 		subitems.remove(w);
 		lv.removeView(w.getInnerView());
 		
+		
 	}
 	public void  Refresh()
 	{

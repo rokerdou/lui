@@ -53,7 +53,7 @@ public class Utils {
             	v=v.substring(0, v.length()-1);
             	int relativev= Integer.parseInt(v);
             	int w=Device.getInstance().getScreenWidth();
-            	int realv=(w*relativev)/100;
+            	int realv=(w*relativev)/1000;
             	
             	root.addAttrs(key,new Integer(realv).toString());
             }

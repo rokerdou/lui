@@ -18,6 +18,7 @@ public class AbstractModel {
 	public int height=100;
 	public String backgroundcolor="#000000";
 	public String id=null;
+	public boolean hidden=false;
 	public AbstractModel(LuaData data)
 	{
 		//setAttrs(data.getAttrs());
@@ -27,9 +28,19 @@ public class AbstractModel {
 		if(data.getAttrs().get("height")!=null)  height= Integer.parseInt((String)(data.getAttrs().get("height")));
 		if(data.getAttrs().get("backgroundcolor")!=null)  backgroundcolor= (String) (data.getAttrs().get("backgroundcolor"));
 		if(data.getAttrs().get("id")!=null)  id= (String) (data.getAttrs().get("id"));
+		if(data.getAttrs().get("hidden")!=null)  hidden= Boolean.parseBoolean((String) data.getAttrs().get("hidden"));
 
 	}
-
+	public void setHidden(boolean f)
+	{
+		hidden=f;
+		
+	}
+	public boolean getHidden()
+	{
+		return hidden;
+		
+	}
 	public int getMargintop()
 	{
 		

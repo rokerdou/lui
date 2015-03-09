@@ -22,7 +22,14 @@ public class WidgetUtils {
        lv.setLayoutParams(layoutParams); 
 
        lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
-		
+	   if(model.hidden)
+	   {
+		   lv.setVisibility(View.GONE);
+	   }
+	   else
+	   {
+		   lv.setVisibility(View.VISIBLE);
+	   }
 	}
 
 }
