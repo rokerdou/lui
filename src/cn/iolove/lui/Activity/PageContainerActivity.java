@@ -8,6 +8,7 @@ import cn.iolove.lui.sandbox.AppSandbox.AppSandboxCallback;
 import cn.iolove.lui.service.PageService;
 import cn.iolove.lui.utils.PageFactory;
 import cn.iolove.lui.view.LuiView;
+import android.R;
 import android.app.Activity;
 
 import android.os.Bundle;
@@ -107,14 +108,15 @@ public class PageContainerActivity extends FragmentActivity{
 		NormalPagFragement fragements = new NormalPagFragement(p);
 		RelativeLayout mParent = (RelativeLayout)findViewById(0x1237156);
 		//mParent.removeAllViews();
-		
-		fragmentManger.beginTransaction().add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
+		//fragmentManger
+		fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
 		 ;
 	}
 	public void pop()
 	{
 		
-		fragmentManger.beginTransaction().remove(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
+		
+		fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).remove(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
 		PageService.getInstance().popPage();
 	}
 	public void switchs(String name)

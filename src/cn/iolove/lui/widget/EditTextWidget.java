@@ -4,6 +4,8 @@ import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.ButtonModel;
 import cn.iolove.lui.model.EditTextModel;
 import cn.iolove.lui.model.UIModel;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +37,28 @@ public class EditTextWidget extends AbstractWidget {
 			et.setText(str);
 			
 		}
+		et.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				bm.text = et.getText().toString();
+				
+				
+			}
+		});
 	
 		// TODO Auto-generated method stub
 
