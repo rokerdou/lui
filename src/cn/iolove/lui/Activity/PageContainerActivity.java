@@ -13,6 +13,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -33,15 +35,7 @@ public class PageContainerActivity extends FragmentActivity{
 			RuntimeContext.init(getApplicationContext(),new RuntimeContextListener() {
 				
 				
-				public void setView(View v) {
-					LuiView	 roots = new LuiView(co);
-					roots.addView(v);
-					root.addView(roots);
-					
-					//setContentView(root);
-					
-				}
-		
+	
 				
 				public void RunOnUiThread(Runnable runnable) {
 					runOnUiThread(runnable);
@@ -53,6 +47,13 @@ public class PageContainerActivity extends FragmentActivity{
 				public Activity getActivityContext() {
 					// TODO Auto-generated method stub
 					return co;
+				}
+
+
+				@Override
+				public void pushPage(String name) {
+					push(name);
+					
 				}
 			},new AppSandboxCallback() {
 				
@@ -105,10 +106,10 @@ public class PageContainerActivity extends FragmentActivity{
 		PageService.getInstance().pushPage(p);
 		NormalPagFragement fragements = new NormalPagFragement(p);
 		RelativeLayout mParent = (RelativeLayout)findViewById(0x1237156);
-		mParent.removeAllViews();
+		//mParent.removeAllViews();
 		
-		fragmentManger.beginTransaction().add(0x1237156, fragements, name).commitAllowingStateLoss();
-		
+		fragmentManger.beginTransaction().add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
+		 ;
 	}
 	public void pop()
 	{
@@ -122,5 +123,22 @@ public class PageContainerActivity extends FragmentActivity{
 		push(name);
 		
 	}
+	@Override
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //监听按下返回键
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                /*已经是最后一个fragment
+                 * getSupportFragmentManager()或者getFragmentManager()
+                 * 具体要看你add to back stack 是用哪个*/
+                //if no more history in stack
+        	PageService.getInstance().getTopPage().OnNavBack();
+        	Log.i("lui", "触发回退键");
+        	
+
+        }
+        return true;
+    }
+	
 
 }

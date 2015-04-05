@@ -67,7 +67,14 @@ public void excuteLuaFunctionCallBack(final String mehodName,final Object[] args
 						LuaHelper.excuteLuaFunction(PageService.getInstance().getTopPage().getState(), mehodName, args, returnnumber);
 					} catch (LuaException e) {
 						// TODO Auto-generated catch block
-						RuntimeContext.showLuaError(e.getMessage());
+						if(mehodName.equals("OnNavBack")||mehodName.equals("OnFronted"))
+						{
+							
+						}
+						else
+						{
+						RuntimeContext.showLuaError("mehodName:"+mehodName+" "+e.getMessage());
+						}
 						e.printStackTrace();
 					}
 

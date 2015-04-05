@@ -64,5 +64,16 @@ public class Page implements PageCircle {
 
 		
 	}
+	@Override
+	public void OnBackend() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public boolean OnNavBack() {
+		LuaService.getInstance().excuteLuaFunctionCallBack("OnNavBack", new Object[]{}, 0);
+
+		return false;
+	}
 
 }

@@ -28,7 +28,7 @@ public class RuntimeContext {
 	private RuntimeContext(){};
 	private static RuntimeContext obj = new RuntimeContext();
 	public  interface RuntimeContextListener{
-		public abstract void setView(View v);
+		public abstract void pushPage(String name);
 		public abstract void RunOnUiThread(final Runnable runnable );
 		public abstract Activity getActivityContext();
 		
@@ -69,8 +69,9 @@ public class RuntimeContext {
 						
 						@Override
 						public void run() {
+							rl.pushPage("main");
 
-							rl.setView((PageService.getInstance().getTopPage().getRootView()));
+							//rl.setView((PageService.getInstance().getTopPage().getRootView()));
 				
 						}
 					});

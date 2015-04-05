@@ -13,3 +13,6 @@ App:popPage();
 end
 function OnFronted()
 end
+function OnNavBack()
+App:popPage();
+end

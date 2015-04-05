@@ -9,6 +9,7 @@ import cn.iolove.lui.view.LuiView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class NormalPagFragement extends Fragment {
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Log.i("lui", e.getMessage());
 			RuntimeContext.showLuaError(e.getMessage());
 		}
 //		/name=names;
@@ -51,9 +53,11 @@ public class NormalPagFragement extends Fragment {
 		// TODO Auto-generated method stub
 		 super.onCreateView(inflater, container, savedInstanceState);
 			mParent = (RelativeLayout)(getActivity().findViewById(0x1237156));
+			Log.i("lui", "exe..Oncreated.."+ page.getPageName());
 			if (mContainer == null)
 			{
 				mContainer = new LuiView(getActivity());
+				
 
 					mContainer.addView(page.getRootView());
 

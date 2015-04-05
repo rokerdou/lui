@@ -34,10 +34,10 @@ public class PageService implements PageServiceInterface {
 	public void start() throws LuaException
 	{
 		
-		StackPage.push(CreateNewPage("main"));
-		LuaService.getInstance().init();
-		Registry.getInstance();
-		getTopPage().Oncreate();
+		//StackPage.push(CreateNewPage("main"));
+		
+		
+		//getTopPage().Oncreate();
 	}
 	public Page CreateNewPage(String name)
 	{
@@ -48,7 +48,9 @@ public class PageService implements PageServiceInterface {
 	@Override
 	public void pushPage(Page obj) {
 		StackPage.push(obj);
+		LuaService.getInstance().init();
 		Registry.pushServiceInLua();
+		Registry.getInstance();
 		
 		
 	}
