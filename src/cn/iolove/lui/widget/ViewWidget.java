@@ -25,6 +25,8 @@ public class ViewWidget extends AbstractWidget {
 		super(m);
 		lv = new LuiView(RuntimeContext.getInstance().rl.getActivityContext());
 		loadModel();
+		//lv.setVerticalScrollBarEnabled(true);
+		
 		
 		
 	}

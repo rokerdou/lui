@@ -8,7 +8,7 @@ import cn.iolove.lui.page.Page;
 
 import cn.iolove.lui.view.LuiView;
 
-public class PageService {
+public class PageService implements PageServiceInterface {
 	private PageService()
 	{};
 	private static PageService obj = new PageService();
@@ -21,6 +21,7 @@ public class PageService {
 		
 		
 	}
+	
 	public void Refresh()
 	{
 		getTopPage().Refresh();
@@ -35,12 +36,31 @@ public class PageService {
 		
 		StackPage.push(CreateNewPage("main"));
 		LuaService.getInstance().init();
+		Registry.getInstance();
 		getTopPage().Oncreate();
 	}
 	public Page CreateNewPage(String name)
 	{
 		Page page = new Page(name);
 		return page;
+		
+	}
+	@Override
+	public void pushPage(Page obj) {
+		StackPage.push(obj);
+		Registry.pushServiceInLua();
+		
+		
+	}
+	@Override
+	public void switchPage(Page obj) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void popPage() {
+		StackPage.remove(StackPage.peek());
+		// TODO Auto-generated method stub
 		
 	}
 }

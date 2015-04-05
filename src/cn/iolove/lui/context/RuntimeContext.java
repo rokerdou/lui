@@ -7,6 +7,8 @@ import org.keplerproject.luajava.LuaStateFactory;
 import cn.iolove.domain.Device;
 
 import cn.iolove.lui.lua.LuaHelper;
+import cn.iolove.lui.sandbox.AppSandbox;
+import cn.iolove.lui.sandbox.AppSandbox.AppSandboxCallback;
 import cn.iolove.lui.service.PageService;
 import cn.iolove.lui.thread.Method;
 import cn.iolove.lui.thread.ThreadFactory;
@@ -41,10 +43,11 @@ public class RuntimeContext {
 	{
 		rl=cb;
 	}
-	public static void init(Context cont,RuntimeContextListener cb)
+	public static void init(Context cont,RuntimeContextListener cb,AppSandboxCallback b)
 	{
 		context=cont;
 		rl=cb;
+		AppSandbox.getInstance().init(b);
 		
 		Device.getInstance().setScreenWidthAndHeight(rl.getActivityContext().getWindowManager().getDefaultDisplay().getWidth(),rl.getActivityContext().getWindowManager().getDefaultDisplay().getHeight());
 

@@ -58,17 +58,19 @@ public void excuteLuaFunctionCallBack(final String mehodName,final Object[] args
 		
 		@Override
 		public void Work() {
-			try {
-				LuaHelper.excuteLuaFunction(PageService.getInstance().getTopPage().getState(), mehodName, args, returnnumber);
-			} catch (LuaException e) {
-				// TODO Auto-generated catch block
-				RuntimeContext.showLuaError(e.getMessage());
-				e.printStackTrace();
-			}
+
 			RuntimeContext.runOnUiThread(new Runnable() {
 				
 				@Override
 				public void run() {
+					try {
+						LuaHelper.excuteLuaFunction(PageService.getInstance().getTopPage().getState(), mehodName, args, returnnumber);
+					} catch (LuaException e) {
+						// TODO Auto-generated catch block
+						RuntimeContext.showLuaError(e.getMessage());
+						e.printStackTrace();
+					}
+
 					PageService.getInstance().Refresh();
 				}
 			});

@@ -13,9 +13,9 @@ import cn.iolove.lui.utils.Utils;
 
 public class LuaHelper {
 
-	public  synchronized static LuaObject[] excuteLuaFunction(LuaState ls ,String mehodName,Object[] args,int returnnumber) throws LuaException
+	public  synchronized static LuaObject[] excuteLuaFunction(LuaState l ,String mehodName,Object[] args,int returnnumber) throws LuaException
 	{
-		LuaState l = ls.newThread();
+		//LuaState l = ls.newThread();
 		
 		int top = l.getTop();
 	try {
@@ -90,7 +90,7 @@ public class LuaHelper {
 	public static LuaData loadScript(LuaState l,String pagename) throws LuaException
 	{
 	
-		int error = l.LdoString(Utils.loadAssetsString("lua/"+pagename+".lua",RuntimeContext.context));
+		int error = l.LdoString(Utils.loadAssetsString("framework/"+"ui.lua",RuntimeContext.context)+Utils.loadAssetsString("lua/"+pagename+".lua",RuntimeContext.context));
 		if(error!=0)
 		{
 			

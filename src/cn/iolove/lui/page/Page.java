@@ -28,6 +28,10 @@ public class Page implements PageCircle {
     	luastate=mLuaState;
     
 	}
+	public String getPageName()
+	{
+		return pagename;
+	}
 	public LuaState getState()
 	{
 		return luastate;
@@ -48,12 +52,16 @@ public class Page implements PageCircle {
 	}
 	@Override
 	public void onDestroy() {
-		// TODO Auto-generated method stub
+		luastate.close();
+		System.gc();
+		
 		
 	}
 	@Override
 	public void OnFronted() {
-		// TODO Auto-generated method stub
+		LuaService.getInstance().excuteLuaFunctionCallBack("OnFronted", new Object[]{}, 0);
+		
+
 		
 	}
 
