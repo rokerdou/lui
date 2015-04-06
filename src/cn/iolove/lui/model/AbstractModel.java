@@ -3,8 +3,10 @@ package cn.iolove.lui.model;
 import java.util.HashMap;
 
 import android.view.View;
+import cn.iolove.domain.Device;
 import cn.iolove.domain.LuaData;
 import cn.iolove.lui.context.RuntimeContext;
+import cn.iolove.lui.utils.Utils;
 import cn.iolove.lui.view.LuiView;
 import cn.iolove.lui.widget.AbstractWidget;
 
@@ -37,6 +39,35 @@ public class AbstractModel {
 	{
 		hidden=f;
 		
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public int getAlpha() {
+		return alpha;
+	}
+	public void setAlpha(int alpha) {
+		this.alpha = alpha;
+	}
+	public void setWidget(AbstractWidget widget) {
+		this.widget = widget;
+	}
+	public void setMargintop(String margintop) {
+		this.margintop = Utils.toNativWidthHeightValue(margintop, Device.getInstance().getScreenHeight());
+	}
+	public void setMarginleft(String marginleft) {
+		this.marginleft = Utils.toNativWidthHeightValue(marginleft,Device.getInstance().getScreenWidth());
+	}
+	public void setWidth(String width) {
+		this.width = Utils.toNativWidthHeightValue(width,Device.getInstance().getScreenWidth());
+	}
+	public void setHeight(String height) {
+		this.height = Utils.toNativWidthHeightValue(height, Device.getInstance().getScreenHeight());
+	}
+	public void setBackgroundcolor(String backgroundcolor) {
+		this.backgroundcolor = backgroundcolor;
 	}
 	public boolean getHidden()
 	{

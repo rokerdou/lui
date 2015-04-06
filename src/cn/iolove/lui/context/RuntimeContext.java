@@ -104,7 +104,12 @@ public class RuntimeContext {
 				// TODO Auto-generated method stub
 			AlertDialog.Builder	alert = new AlertDialog.Builder(rl.getActivityContext());
 			alert.setTitle("LUA´íÎó");
-			alert.setMessage(str);
+			String [] data = str.split(":");
+			Integer line = Integer.parseInt(data[1]);
+			line=line-69+1;
+			String strs=data[0]+"µÚ"+line.toString()+"ÐÐ"+data[2];
+			
+			alert.setMessage(strs);
 			alert.setPositiveButton("ok", new OnClickListener() {
 				
 				@Override

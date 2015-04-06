@@ -102,5 +102,13 @@ public class Utils {
 		}
 		return EncodingUtils.getString(luaByte, "UTF-8");
 	} 
-	
+	public static int toNativWidthHeightValue(String v,int realwOrH)
+	{
+    	v=v.substring(0, v.length()-1);
+    	int relativev= Integer.parseInt(v);
+    	
+    	int realv=(realwOrH*relativev)/1000;
+    	return realv;
+		
+	}
 }

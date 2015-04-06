@@ -26,18 +26,12 @@ public class NormalPagFragement extends Fragment {
 	RelativeLayout mParent;
 	private PageCircle page;
 	private String name;
-	public NormalPagFragement(PageCircle names)
+	public NormalPagFragement(PageCircle names) throws LuaException
 	{
 		page=names;
-		try {
-			page.Oncreate();
-		} catch (LuaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.i("lui", e.getMessage());
-			RuntimeContext.showLuaError(e.getMessage());
-		}
-//		/name=names;
+
+		page.Oncreate();
+
 	}
 
 	

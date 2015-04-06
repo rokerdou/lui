@@ -1,5 +1,7 @@
 package cn.iolove.lui.Activity;
 
+import org.keplerproject.luajava.LuaException;
+
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.context.RuntimeContext.RuntimeContextListener;
 import cn.iolove.lui.page.NormalPagFragement;
@@ -105,12 +107,19 @@ public class PageContainerActivity extends FragmentActivity{
 	{
 		Page p =PageFactory.CreatePage(name);
 		PageService.getInstance().pushPage(p);
-		NormalPagFragement fragements = new NormalPagFragement(p);
-		RelativeLayout mParent = (RelativeLayout)findViewById(0x1237156);
-		//mParent.removeAllViews();
-		//fragmentManger
-		fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
-		 ;
+		NormalPagFragement fragements;
+		try {
+			fragements = new NormalPagFragement(p);
+			RelativeLayout mParent = (RelativeLayout)findViewById(0x1237156);
+			//mParent.removeAllViews();
+			//fragmentManger
+			fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
+
+		} catch (LuaException e) {
+			// TODO Auto-generated catch block
+			RuntimeContext.showLuaError(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	public void pop()
 	{
