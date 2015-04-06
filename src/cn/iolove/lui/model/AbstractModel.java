@@ -19,6 +19,7 @@ public class AbstractModel {
 	public String backgroundcolor="#000000";
 	public String id=null;
 	public boolean hidden=false;
+	public int alpha=0;
 	public AbstractModel(LuaData data)
 	{
 		//setAttrs(data.getAttrs());
@@ -29,6 +30,7 @@ public class AbstractModel {
 		if(data.getAttrs().get("backgroundcolor")!=null)  backgroundcolor= (String) (data.getAttrs().get("backgroundcolor"));
 		if(data.getAttrs().get("id")!=null)  id= (String) (data.getAttrs().get("id"));
 		if(data.getAttrs().get("hidden")!=null)  hidden= Boolean.parseBoolean((String) data.getAttrs().get("hidden"));
+		if(data.getAttrs().get("alpha")!=null)  alpha= Integer.parseInt((String) data.getAttrs().get("alpha"));
 
 	}
 	public void setHidden(boolean f)

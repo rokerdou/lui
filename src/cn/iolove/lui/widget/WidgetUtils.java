@@ -20,8 +20,10 @@ public class WidgetUtils {
        margin.setMargins(x,y, x+w, y+h); 
        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(margin); 
        lv.setLayoutParams(layoutParams); 
+     
 
        lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
+       lv.getBackground().setAlpha((int) (255-(model.alpha/100)*255));
 	   if(model.hidden)
 	   {
 		   lv.setVisibility(View.GONE);

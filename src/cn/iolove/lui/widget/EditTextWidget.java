@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class EditTextWidget extends AbstractWidget {
 
-	private TextView et;
+	private EditText et;
 	public EditTextWidget(UIModel m) {
 		super(m);
 		et = new EditText(RuntimeContext.getInstance().rl.getActivityContext());
@@ -32,6 +32,8 @@ public class EditTextWidget extends AbstractWidget {
 		WidgetUtils.loadModel(model, this);
 		final EditTextModel bm = (EditTextModel)model;
 		String str = ((EditTextModel)model).text;
+		et.setBackgroundDrawable(null);
+		et.getPaint().setAlpha((int) (122));
 		if(str!=null)
 		{
 			et.setText(str);
