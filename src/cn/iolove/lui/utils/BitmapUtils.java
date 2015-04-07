@@ -3,6 +3,7 @@ package cn.iolove.lui.utils;
 import java.io.IOException;
 
 import cn.iolove.lui.context.RuntimeContext;
+import cn.iolove.lui.service.ImageService;
 import cn.iolove.lui.service.PageService;
 import cn.iolove.lui.thread.Method;
 import cn.iolove.lui.thread.ThreadFactory;
@@ -16,7 +17,25 @@ import android.util.Log;
 public class BitmapUtils {
 	public static synchronized void loadImage(final String path,final int reqHeight,final int reqWidth,final LoadImageListener lis)
 	{
-		ThreadFactory.getWorkThread(new Method() {
+		Bitmap bmp = ImageService.imcache.getBitmapFromCache(path);
+		if(bmp!=null)
+		{
+			 Drawable drawable= new BitmapDrawable(bmp);
+				
+
+			lis.succeed(drawable);
+			return;
+		}else
+		{
+			loadDiskImage(path,reqHeight,reqWidth,lis);
+		}
+	
+
+
+	}
+	private static void loadDiskImage(final String path,final int reqHeight,final int reqWidth,final LoadImageListener lis)
+	{
+	ThreadFactory.getWorkThread(new Method() {
 			
 			@Override
 			public void Work() {
@@ -37,6 +56,7 @@ public class BitmapUtils {
 					 Bitmap mask2 = BitmapFactory.decodeStream(RuntimeContext.getInstance().rl.getActivityContext().getAssets().open("lua/"+path), null, maskOpts);
 
 					 Drawable drawable= new BitmapDrawable(mask2);
+					 ImageService.imcache.putBitmapToCache(path, mask2);
 					
 
 					lis.succeed(drawable);
@@ -49,8 +69,6 @@ public class BitmapUtils {
 				
 			}
 		}).start();
-
-
 	}
 	private static int calculateInSampleSize(int srcWidth, int srcHeight,
             int reqWidth, int reqHeight) {
