@@ -104,12 +104,29 @@ public class RuntimeContext {
 				// TODO Auto-generated method stub
 			AlertDialog.Builder	alert = new AlertDialog.Builder(rl.getActivityContext());
 			alert.setTitle("LUA错误");
-			String [] data = str.split(":");
-			Integer line = Integer.parseInt(data[1]);
-			line=line-69+1;
-			String strs=data[0]+"第"+line.toString()+"行"+data[2];
+			if(str!=null)
+			{
+				Log.i("lui", str);
+				String [] data = str.split(":");
+				String strs;
+				try
+				{
+				Integer line = Integer.parseInt(data[1]);
+				line=line-69+1;
+			    strs=data[0]+"第"+line.toString()+"行"+data[2];
+				}catch (Exception e)
+				{
+					alert.setMessage(str);
+					return;
+				}
+				
+				alert.setMessage(strs);
+			}
+			else
+			{
+				alert.setMessage("Lui framework error");
 			
-			alert.setMessage(strs);
+			}
 			alert.setPositiveButton("ok", new OnClickListener() {
 				
 				@Override

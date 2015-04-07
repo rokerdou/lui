@@ -30,6 +30,8 @@ public class ButtonWidget extends AbstractWidget {
 	@Override
 	protected void loadModel() {
 		WidgetUtils.loadModel(model, this);
+		super.loadModel();
+		reloadBackground(btn);
 		final ButtonModel bm = (ButtonModel)model;
 		String str = ((ButtonModel)model).text;
 		if(str!=null)
@@ -53,6 +55,13 @@ public class ButtonWidget extends AbstractWidget {
 		
 		
 
+	}
+
+	@Override
+	public void Ondestroy() {
+		btn.setBackgroundDrawable(null);
+		btn=null;
+		
 	}
 
 

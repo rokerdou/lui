@@ -24,11 +24,19 @@ public class PageService implements PageServiceInterface {
 	
 	public void Refresh()
 	{
+		if(!StackPage.isEmpty())
 		getTopPage().Refresh();
 	}
 	public Page getTopPage()
 	{
 		return StackPage.peek();
+		
+	}
+	public Page getSecontPage()
+	{
+		if(StackPage.size()<2) return null;
+		
+		return StackPage.get(StackPage.indexOf(StackPage.peek())-1);
 		
 	}
 	public void start() throws LuaException

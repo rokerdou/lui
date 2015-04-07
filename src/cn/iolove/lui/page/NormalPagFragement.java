@@ -31,6 +31,7 @@ public class NormalPagFragement extends Fragment {
 		page=names;
 
 		page.Oncreate();
+		Log.i("lui", "onCreate : "+page.getPageName());
 
 	}
 
@@ -72,6 +73,20 @@ public class NormalPagFragement extends Fragment {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		page.OnFronted();
+		Log.i("lui", "OnFronted : "+page.getPageName());
+	}
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		page.OnBackend();
+		Log.i("lui", "OnBackend : "+page.getPageName());
+	}
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		Log.i("lui", "onDestroy : "+page.getPageName());
 	}
 
 }

@@ -22,6 +22,8 @@ public class AbstractModel {
 	public String id=null;
 	public boolean hidden=false;
 	public int alpha=0;
+	public String backgroundimage;
+	public String backgroundscale="fill";
 	public AbstractModel(LuaData data)
 	{
 		//setAttrs(data.getAttrs());
@@ -33,7 +35,21 @@ public class AbstractModel {
 		if(data.getAttrs().get("id")!=null)  id= (String) (data.getAttrs().get("id"));
 		if(data.getAttrs().get("hidden")!=null)  hidden= Boolean.parseBoolean((String) data.getAttrs().get("hidden"));
 		if(data.getAttrs().get("alpha")!=null)  alpha= Integer.parseInt((String) data.getAttrs().get("alpha"));
+		if(data.getAttrs().get("backgroundimage")!=null)  backgroundimage= (String) (data.getAttrs().get("backgroundimage"));
+		if(data.getAttrs().get("backgroundscale")!=null)  backgroundscale= (String) (data.getAttrs().get("backgroundscale"));
 
+	}
+	public String getBackgroundimage() {
+		return backgroundimage;
+	}
+	public void setBackgroundimage(String backgroundimage) {
+		this.backgroundimage = backgroundimage;
+	}
+	public String getBackgroundscale() {
+		return backgroundscale;
+	}
+	public void setBackgroundscale(String backgroundscale) {
+		this.backgroundscale = backgroundscale;
 	}
 	public void setHidden(boolean f)
 	{

@@ -30,10 +30,10 @@ public class EditTextWidget extends AbstractWidget {
 	@Override
 	protected void loadModel() {
 		WidgetUtils.loadModel(model, this);
+		
 		final EditTextModel bm = (EditTextModel)model;
 		String str = ((EditTextModel)model).text;
-		et.setBackgroundDrawable(null);
-		et.getPaint().setAlpha((int) (122));
+
 		if(str!=null)
 		{
 			et.setText(str);
@@ -61,9 +61,18 @@ public class EditTextWidget extends AbstractWidget {
 				
 			}
 		});
-	
+		super.loadModel();
+		reloadBackground(et);
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void Ondestroy() {
+		// TODO Auto-generated method stub
+		et.setBackgroundDrawable(null);
+		et=null;
+		
 	}
 
 }

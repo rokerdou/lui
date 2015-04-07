@@ -53,6 +53,7 @@ public class Page implements PageCircle {
 	@Override
 	public void onDestroy() {
 		luastate.close();
+		root.Ondestroy();
 		System.gc();
 		
 		

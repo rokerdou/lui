@@ -12,6 +12,7 @@ import cn.iolove.lui.utils.PageFactory;
 import cn.iolove.lui.view.LuiView;
 import android.R;
 import android.app.Activity;
+import android.app.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +26,7 @@ public class PageContainerActivity extends FragmentActivity{
 	private Activity co = this;
 	private FragmentManager fragmentManger;
 	private RelativeLayout root;
+	private NormalPagFragement lastfrag=null;
 @Override
 		protected void onCreate(Bundle arg0) {
 			// TODO Auto-generated method stub
@@ -110,10 +112,18 @@ public class PageContainerActivity extends FragmentActivity{
 		NormalPagFragement fragements;
 		try {
 			fragements = new NormalPagFragement(p);
+
 			RelativeLayout mParent = (RelativeLayout)findViewById(0x1237156);
 			//mParent.removeAllViews();
 			//fragmentManger
-			fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).addToBackStack(name).commitAllowingStateLoss();
+			Page ps =PageService.getInstance().getSecontPage();
+			if(ps!=null)
+			{
+				//fragmentManger.beginTransaction().addToBackStack(ps.getPageName()).commit();
+			fragmentManger.beginTransaction().hide(fragmentManger.findFragmentByTag(ps.getPageName())).commit();
+			}
+			
+			fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).commitAllowingStateLoss();
 
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
@@ -127,11 +137,26 @@ public class PageContainerActivity extends FragmentActivity{
 		
 		fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).remove(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
 		PageService.getInstance().popPage();
+		if(PageService.getInstance().getTopPage()!=null)
+		fragmentManger.beginTransaction().show(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
 	}
 	public void switchs(String name)
 	{
-		pop();
-		push(name);
+		PageService.getInstance().popPage();
+		Page p =PageFactory.CreatePage(name);
+		PageService.getInstance().pushPage(p);
+		NormalPagFragement fragements;
+		try {
+			fragements = new NormalPagFragement(p);
+
+			fragmentManger.beginTransaction().setCustomAnimations( R.anim.slide_in_left, R.anim.slide_out_right).replace(0x1237156, fragements,p.getPageName()).commit();
+		} catch (LuaException e) {
+			// TODO Auto-generated catch block
+			RuntimeContext.showLuaError(e.getMessage());
+			e.printStackTrace();
+		}
+		
+
 		
 	}
 	@Override
@@ -143,6 +168,7 @@ public class PageContainerActivity extends FragmentActivity{
                  * getSupportFragmentManager()或者getFragmentManager()
                  * 具体要看你add to back stack 是用哪个*/
                 //if no more history in stack
+        	if(PageService.getInstance().getTopPage()!=null)
         	PageService.getInstance().getTopPage().OnNavBack();
         	Log.i("lui", "触发回退键");
         	

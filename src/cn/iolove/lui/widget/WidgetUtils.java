@@ -1,6 +1,10 @@
 package cn.iolove.lui.widget;
 
+import java.util.ArrayList;
+
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -23,7 +27,7 @@ public class WidgetUtils {
      
 
        lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
-       lv.getBackground().setAlpha((int) (255-(model.alpha/100)*255));
+       lv.getBackground().setAlpha((int) (255-(model.alpha*255)/100));
 	   if(model.hidden)
 	   {
 		   lv.setVisibility(View.GONE);
@@ -32,6 +36,7 @@ public class WidgetUtils {
 	   {
 		   lv.setVisibility(View.VISIBLE);
 	   }
+	   
 	}
 
 }

@@ -8,7 +8,7 @@ function onCreated()
 	return  root
 end
 function Onclick()
-App:popPage();
+App:pushPage("main");
 
 end
 function OnFronted()

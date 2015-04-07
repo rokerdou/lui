@@ -11,8 +11,13 @@ import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.lua.LuaHelper;
 import cn.iolove.lui.model.UIModel;
 import cn.iolove.lui.service.LuaService;
+import cn.iolove.lui.utils.BitmapUtils;
+import cn.iolove.lui.utils.LoadImageListener;
 import cn.iolove.lui.view.LuiView;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -131,8 +136,25 @@ public class ViewWidget extends AbstractWidget {
 	protected void loadModel() {
 
 		WidgetUtils.loadModel(model, this);
+		super.loadModel();
+
+		reloadBackground(lv);
 	       
 		
+	}
+
+	@Override
+	public void Ondestroy() {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(i=0;i<subitems.size();i++)
+		{
+			AbstractWidget child = subitems.get(i);
+			
+			child.Ondestroy();
+			
+		}	
+		lv.removeAllViews();
 	}
 
 	
