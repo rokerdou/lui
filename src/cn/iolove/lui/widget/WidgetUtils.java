@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.model.UIModel;
 
 public class WidgetUtils {
@@ -28,6 +29,7 @@ public class WidgetUtils {
 
        lv.setBackgroundColor(Color.parseColor(model.getBackgroundcolor()));
        lv.getBackground().setAlpha((int) (255-(model.alpha*255)/100));
+       LOG.i(WidgetUtils.class, "model "+ model.id+" "+ model.hidden);
 	   if(model.hidden)
 	   {
 		   lv.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package cn.iolove.lui.page;
 
 import org.keplerproject.luajava.LuaException;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.service.PageService;
 import cn.iolove.lui.utils.PageFactory;
@@ -31,7 +32,7 @@ public class NormalPagFragement extends Fragment {
 		page=names;
 
 		page.Oncreate();
-		Log.i("lui", "onCreate : "+page.getPageName());
+		LOG.i(this, "onCreate : "+page.getPageName());
 
 	}
 
@@ -48,7 +49,7 @@ public class NormalPagFragement extends Fragment {
 		// TODO Auto-generated method stub
 		 super.onCreateView(inflater, container, savedInstanceState);
 			mParent = (RelativeLayout)(getActivity().findViewById(0x1237156));
-			Log.i("lui", "exe..Oncreated.."+ page.getPageName());
+			LOG.i(this, "exe..Oncreated.."+ page.getPageName());
 			if (mContainer == null)
 			{
 				mContainer = new LuiView(getActivity());
@@ -73,20 +74,20 @@ public class NormalPagFragement extends Fragment {
 		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 		page.OnFronted();
-		Log.i("lui", "OnFronted : "+page.getPageName());
+		LOG.i(this, "OnFronted : "+page.getPageName());
 	}
 	@Override
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		page.OnBackend();
-		Log.i("lui", "OnBackend : "+page.getPageName());
+		LOG.i(this, "OnBackend : "+page.getPageName());
 	}
-	@Override
+	@Override	
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		Log.i("lui", "onDestroy : "+page.getPageName());
+		LOG.i(this, "onDestroy : "+page.getPageName());
 	}
 
 }

@@ -32,6 +32,10 @@ public class PageService implements PageServiceInterface {
 		return StackPage.peek();
 		
 	}
+	public int getStackSize()
+	{
+		return StackPage.size();
+	}
 	public Page getSecontPage()
 	{
 		if(StackPage.size()<2) return null;

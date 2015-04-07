@@ -7,6 +7,7 @@ import org.keplerproject.luajava.LuaState;
 
 import android.util.Log;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.domain.LuaData;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.utils.Utils;
@@ -75,7 +76,7 @@ public class LuaHelper {
 		
 
 		mLuaState.setGlobal(name);
-		Log.i("lui", "È¥³ý"+name);
+		LOG.i(LuaHelper.class, "È¥³ý"+name);
 		
 		
 	}
@@ -98,7 +99,7 @@ public class LuaHelper {
 
 		}
 		LuaObject obj = (excuteLuaFunction(l,"onCreated",new Object[]{},1))[0];
-		Log.i("lui", "get luaUIJson :" +obj.toString());
+		LOG.i(LuaHelper.class, "get luaUIJson :" +obj.toString());
 		LuaObject rs;
 
 		
@@ -107,7 +108,7 @@ public class LuaHelper {
 		if(rs.isString())
 		{
 			rs.getString();
-			Log.i("lui", "get luaUIJson :" +rs.getString());
+			LOG.i(LuaHelper.class,"get luaUIJson :" +rs.getString());
 			//RuntimeContext.getInstance().showLuaError(rs.getString());
 			return Utils.getMap4Json(new String(rs.getString()));
 			

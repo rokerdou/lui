@@ -4,6 +4,7 @@ import org.keplerproject.luajava.LuaException;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.domain.Device;
 
 import cn.iolove.lui.lua.LuaHelper;
@@ -106,7 +107,7 @@ public class RuntimeContext {
 			alert.setTitle("LUA´íÎó");
 			if(str!=null)
 			{
-				Log.i("lui", str);
+				LOG.i(this, str);
 				String [] data = str.split(":");
 				String strs;
 				try
@@ -117,6 +118,15 @@ public class RuntimeContext {
 				}catch (Exception e)
 				{
 					alert.setMessage(str);
+					alert.setPositiveButton("ok", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface arg0, int arg1) {
+							arg0.dismiss();
+							
+						}
+					});
+					alert.show();
 					return;
 				}
 				

@@ -1,5 +1,6 @@
 package cn.iolove.lui.widget;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.ButtonModel;
 import cn.iolove.lui.model.UIModel;
@@ -46,7 +47,7 @@ public class ButtonWidget extends AbstractWidget {
 				@Override
 				public void onClick(View button) {
 					LuaService.getInstance().excuteLuaFunctionCallBack(bm.Onclick, new Object[]{}, 0);
-					Log.i("lui", "触发了");
+					LOG.i(this, "触发了");
 					
 				}
 			});

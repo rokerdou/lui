@@ -7,6 +7,7 @@ import org.keplerproject.luajava.LuaStateFactory;
 
 import android.util.Log;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.domain.LuaData;
 
 import cn.iolove.lui.context.RuntimeContext;
@@ -28,7 +29,7 @@ class log
 {
 	public void i(String text)
 	{
-		Log.i("lui", text);
+		LOG.i(obj, text);
 	}
 }
 public void init()
@@ -76,6 +77,7 @@ public void excuteLuaFunctionCallBack(final String mehodName,final Object[] args
 						RuntimeContext.showLuaError("mehodName:"+mehodName+" "+e.getMessage());
 						}
 						e.printStackTrace();
+						return;
 					}
 
 					PageService.getInstance().Refresh();

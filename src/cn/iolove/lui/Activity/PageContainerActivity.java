@@ -2,6 +2,7 @@ package cn.iolove.lui.Activity;
 
 import org.keplerproject.luajava.LuaException;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.context.RuntimeContext.RuntimeContextListener;
 import cn.iolove.lui.page.NormalPagFragement;
@@ -123,9 +124,9 @@ public class PageContainerActivity extends FragmentActivity{
 			fragmentManger.beginTransaction().hide(fragmentManger.findFragmentByTag(ps.getPageName())).commit();
 			}
 			
-			fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).commitAllowingStateLoss();
+			fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).add(0x1237156, fragements, name).addToBackStack(null).commitAllowingStateLoss();
 
-		} catch (LuaException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			RuntimeContext.showLuaError(e.getMessage());
 			e.printStackTrace();
@@ -134,11 +135,14 @@ public class PageContainerActivity extends FragmentActivity{
 	public void pop()
 	{
 		
-		
+		if(PageService.getInstance().getStackSize()>1)
+		{
 		fragmentManger.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right).remove(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
 		PageService.getInstance().popPage();
 		if(PageService.getInstance().getTopPage()!=null)
 		fragmentManger.beginTransaction().show(fragmentManger.findFragmentByTag(PageService.getInstance().getTopPage().getPageName())).commit();
+	
+		}
 	}
 	public void switchs(String name)
 	{
@@ -176,7 +180,7 @@ public class PageContainerActivity extends FragmentActivity{
                 //if no more history in stack
         	if(PageService.getInstance().getTopPage()!=null)
         	PageService.getInstance().getTopPage().OnNavBack();
-        	Log.i("lui", "触发回退键");
+        	LOG.i(this, "触发回退键");
         	
 
         }

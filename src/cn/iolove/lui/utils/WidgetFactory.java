@@ -6,6 +6,7 @@ import java.util.Map;
 
 import android.util.Log;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.domain.LuaData;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.UIModel;
@@ -69,7 +70,7 @@ public final class WidgetFactory {
 	public static AbstractWidget createWidget(LuaData data)
 	{
 		
-		Log.i("System.err","qNmae  "+ data.getAttrs().get("qName").toString());
+		LOG.i(WidgetFactory.class,"qNmae  "+ data.getAttrs().get("qName").toString());
 		Class c = getWidgetClass(data.getAttrs().get("qName").toString());
 		
 		Class [] params={UIModel.class};

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import cn.iolove.domain.Device;
 import cn.iolove.domain.LuaData;
+import cn.iolove.lui.context.RuntimeContext;
 
 import android.content.Context;
 
@@ -77,6 +78,7 @@ public class Utils {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			RuntimeContext.getInstance().showLuaError(e.getMessage());
 		}
 
         return root;         

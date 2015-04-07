@@ -63,7 +63,9 @@ public class ViewWidget extends AbstractWidget {
 	
 	public void addChild(AbstractWidget child)
 	{
+		child.loadModel();
 		lv.addView(child.getInnerView());
+		
 		
 		subitems.add(child);
 		
@@ -119,7 +121,7 @@ public class ViewWidget extends AbstractWidget {
 	}
 	public void  Refresh()
 	{
-		loadModel();
+		
 		int i=0;
 		for(i=0;i<subitems.size();i++)
 		{
@@ -129,6 +131,7 @@ public class ViewWidget extends AbstractWidget {
 		
 			
 		}
+		loadModel();
 		
 	}
 

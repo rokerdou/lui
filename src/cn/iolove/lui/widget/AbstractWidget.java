@@ -2,11 +2,13 @@ package cn.iolove.lui.widget;
 
 import java.util.ArrayList;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.UIModel;
 import cn.iolove.lui.service.LuaService;
 import cn.iolove.lui.utils.BitmapUtils;
 import cn.iolove.lui.utils.LoadImageListener;
+import cn.iolove.lui.utils.WidgetFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -60,7 +62,7 @@ public  abstract class AbstractWidget {
 									}
 								});
 							}
-							Log.i("lui", model.backgroundimage+" "+"Õº∆¨º”‘ÿsucceed");
+							LOG.i(this, model.backgroundimage+" "+"Õº∆¨º”‘ÿsucceed");
 							
 							
 			
@@ -69,7 +71,7 @@ public  abstract class AbstractWidget {
 					
 					@Override
 					public void fail() {
-					Log.i("lui", "Õº∆¨º”‘ÿ ß∞‹");
+						LOG.i(this, "Õº∆¨º”‘ÿ ß∞‹");
 					imageDrawable=null;
 						
 						
@@ -88,7 +90,7 @@ public  abstract class AbstractWidget {
 		if(id!=null)
 		{
 			LuaService.getInstance().pushGlobalObject(id, model);
-			Log.i("lui", "add "+id);
+			LOG.i(this, "add "+id);
 		}
 		
 	}
