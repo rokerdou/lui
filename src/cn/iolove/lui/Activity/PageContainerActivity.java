@@ -142,6 +142,12 @@ public class PageContainerActivity extends FragmentActivity{
 	}
 	public void switchs(String name)
 	{
+		if(name.equals("main"))
+		{
+			int a=1;
+			a=2;
+			;;
+		}
 		PageService.getInstance().popPage();
 		Page p =PageFactory.CreatePage(name);
 		PageService.getInstance().pushPage(p);

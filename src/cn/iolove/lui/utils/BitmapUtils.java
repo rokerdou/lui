@@ -11,9 +11,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
+import android.util.Log;
 
 public class BitmapUtils {
-	public static void loadImage(final String path,final LoadImageListener lis)
+	public static synchronized void loadImage(final String path,final int reqHeight,final int reqWidth,final LoadImageListener lis)
 	{
 		ThreadFactory.getWorkThread(new Method() {
 			
@@ -27,9 +28,14 @@ public class BitmapUtils {
 					BitmapFactory.Options maskOpts = new BitmapFactory.Options();
 					maskOpts.inJustDecodeBounds=true;
 					maskOpts.inPreferredConfig = Bitmap.Config.ALPHA_8;
-//					bitmap.compress(Bitmap.CompressFormat.PNG, 90, );
+
+					 Bitmap mask1 = BitmapFactory.decodeStream(RuntimeContext.getInstance().rl.getActivityContext().getAssets().open("lua/"+path), null, maskOpts);
+					 maskOpts.inSampleSize = calculateInSampleSize(maskOpts.outWidth,maskOpts.outHeight, reqWidth, reqHeight);				
+					 maskOpts.inJustDecodeBounds=false;
+					 maskOpts.inPurgeable = true;  
+					 maskOpts.inInputShareable = true;  
 					 Bitmap mask2 = BitmapFactory.decodeStream(RuntimeContext.getInstance().rl.getActivityContext().getAssets().open("lua/"+path), null, maskOpts);
-					 
+
 					 Drawable drawable= new BitmapDrawable(mask2);
 					
 
@@ -46,6 +52,28 @@ public class BitmapUtils {
 
 
 	}
+	private static int calculateInSampleSize(int srcWidth, int srcHeight,
+            int reqWidth, int reqHeight) {
+        int inSampleSize = 1;
+
+        if (srcHeight > reqHeight || srcWidth > reqWidth) {
+            float scaleW = (float) srcWidth / (float) reqWidth;
+            float scaleH = (float) srcHeight / (float) reqHeight;
+
+            float sample = scaleW > scaleH ? scaleW : scaleH;
+            // 只能是2的次幂
+            if (sample < 3)
+                inSampleSize = (int) sample;
+            else if (sample < 6.5)
+                inSampleSize = 4;
+            else if (sample < 8)
+                inSampleSize = 8;
+            else
+                inSampleSize = (int) sample;
+
+        }
+        return inSampleSize;
+    }
 	public static Drawable  formatImage(BitmapDrawable drawable,String imageScale)
 	{
 		if (imageScale.equals("none"))

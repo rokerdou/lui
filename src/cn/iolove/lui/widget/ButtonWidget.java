@@ -59,6 +59,7 @@ public class ButtonWidget extends AbstractWidget {
 
 	@Override
 	public void Ondestroy() {
+		model=null;
 		btn.setBackgroundDrawable(null);
 		btn=null;
 		

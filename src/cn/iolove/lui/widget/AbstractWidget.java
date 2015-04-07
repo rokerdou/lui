@@ -23,51 +23,62 @@ public  abstract class AbstractWidget {
 	protected UIModel model;
 	protected String id=null;
 	public  abstract void Ondestroy();
+	public static Object obj = new Object();
 	public UIModel getModel()
 	{
 		return model;
 	}
-	protected  void loadModel()
+	protected  void  loadModel()
 	{
-		if(model.backgroundcolor!=null)
+		synchronized(obj) 
 		{
-			colorDrawable = new ColorDrawable(Color.parseColor(model.backgroundcolor));
-			
-		}
-		if(model.backgroundimage!=null)
-		{
-			BitmapUtils.loadImage(model.backgroundimage, new LoadImageListener() {
+			if(model.backgroundcolor!=null)
+			{
+				colorDrawable = new ColorDrawable(Color.parseColor(model.backgroundcolor));
 				
-				@Override
-				public void succeed(final Drawable rl) {
-				RuntimeContext.runOnUiThread(new Runnable() {
+			}
+			if(model.backgroundimage!=null)
+			{
+				BitmapUtils.loadImage(model.backgroundimage, model.height,model.width,new LoadImageListener() {
 					
 					@Override
-					public void run() {
+					public void succeed(final Drawable rl) {
+	
+							
+							imageDrawable=(BitmapDrawable) rl;
+							
+							if(imageDrawable!=null)
+							{
+								
+								RuntimeContext.runOnUiThread(new Runnable() {
+									
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										reloadBackground(getInnerView());
+										
+									}
+								});
+							}
+							Log.i("lui", model.backgroundimage+" "+"Õº∆¨º”‘ÿsucceed");
+							
+							
+			
 						
-						imageDrawable=(BitmapDrawable) rl;
+					}
+					
+					@Override
+					public void fail() {
+					Log.i("lui", "Õº∆¨º”‘ÿ ß∞‹");
+					imageDrawable=null;
 						
-						
-						Log.i("lui", "Õº∆¨º”‘ÿsucceed");
-						
-						
-				
 						
 					}
 				});
-					
-				}
-				
-				@Override
-				public void fail() {
-				Log.i("lui", "Õº∆¨º”‘ÿ ß∞‹");
-				imageDrawable=null;
-					
-					
-				}
-			});
-		
+			
+			}
 		}
+		reloadBackground(getInnerView());
 	}
 
 	public AbstractWidget(UIModel m)
@@ -92,24 +103,28 @@ public  abstract class AbstractWidget {
 	}
 	protected void reloadBackground(View view)
 	{
-		ArrayList list = new ArrayList(2);
-		if (colorDrawable != null)
-			list.add(colorDrawable);
-		if (imageDrawable != null)
+		synchronized(obj) 
 		{
-			imageDrawable.setAlpha(255- ((model.alpha*255)/100));
-			list.add(imageDrawable);
-		}
-		LayerDrawable drawable = new LayerDrawable((Drawable[])list.toArray(new Drawable[list.size()]));
-			drawable.setAlpha(255- ((model.alpha*255)/100));		
-		if (view != null&&imageDrawable!=null)
-		{
-			view.setBackgroundDrawable(imageDrawable);
+			ArrayList list = new ArrayList(2);
+			if (colorDrawable != null)
+				list.add(colorDrawable);
+			if (imageDrawable != null)
+			{
+				imageDrawable.setAlpha(255- ((model.alpha*255)/100));
+				list.add(imageDrawable);
+			}
+			LayerDrawable drawable = new LayerDrawable((Drawable[])list.toArray(new Drawable[list.size()]));
+				drawable.setAlpha(255- ((model.alpha*255)/100));		
+			if (view != null&&imageDrawable!=null)
+			{
+				view.setBackgroundDrawable(imageDrawable);
+				
+			}
 			
+			else
+				System.out.println("reloadBackground on empty view.");
 		}
 		
-		else
-			System.out.println("reloadBackground on empty view.");
 	}
 	
 

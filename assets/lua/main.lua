@@ -17,7 +17,7 @@ App:pushPage("second");
 end
 function onCreated()
     
-	local root = view{id="at",marginleft="0%",margintop="0%",width="1000%",height="1000%",backgroundimage="image/pen.png"}
+	local root = view{id="at",marginleft="0%",margintop="0%",width="1000%",height="1000%"}
 	 roost = view{id="as",marginleft="0%",margintop="0%",width="1000%",height="1000%",backgroundimage="image/pen.png"}
 
 	roost:addChild(button{id="buttons",marginleft="20%",Onclick="Onclick",margintop="200%",width="800%",height="110%",backgroundimage="image/login-button.png",backgroundscale="fill",text="你好",backgroundcolor="#cccccc",alpha="0"})
@@ -26,6 +26,7 @@ function onCreated()
 	return  root
 end
 function OnNavBack()
+App:popPage();
 end
 function OnFronted()
 end

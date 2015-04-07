@@ -138,7 +138,7 @@ public class ViewWidget extends AbstractWidget {
 		WidgetUtils.loadModel(model, this);
 		super.loadModel();
 
-		reloadBackground(lv);
+		//reloadBackground(lv);
 	       
 		
 	}
@@ -153,8 +153,13 @@ public class ViewWidget extends AbstractWidget {
 			
 			child.Ondestroy();
 			
-		}	
+		}
+		lv.setBackgroundDrawable(null);
 		lv.removeAllViews();
+		lv=null;
+		subitems.clear();
+		subitems=null;
+		System.gc();
 	}
 
 	
