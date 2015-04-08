@@ -2,6 +2,7 @@ package cn.iolove.lui.utils;
 
 import java.io.IOException;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.service.ImageService;
 import cn.iolove.lui.service.PageService;
@@ -49,7 +50,8 @@ public class BitmapUtils {
 					maskOpts.inPreferredConfig = Bitmap.Config.ALPHA_8;
 
 					 Bitmap mask1 = BitmapFactory.decodeStream(RuntimeContext.getInstance().rl.getActivityContext().getAssets().open("lua/"+path), null, maskOpts);
-					 maskOpts.inSampleSize = calculateInSampleSize(maskOpts.outWidth,maskOpts.outHeight, reqWidth, reqHeight);				
+					 maskOpts.inSampleSize = calculateInSampleSize(maskOpts, reqWidth, reqHeight);	
+					 LOG.i(BitmapUtils.class, "image : "+path+" Height"+reqHeight);
 					 maskOpts.inJustDecodeBounds=false;
 					 maskOpts.inPurgeable = true;  
 					 maskOpts.inInputShareable = true;  
@@ -70,28 +72,22 @@ public class BitmapUtils {
 			}
 		}).start();
 	}
-	private static int calculateInSampleSize(int srcWidth, int srcHeight,
-            int reqWidth, int reqHeight) {
-        int inSampleSize = 1;
-
-        if (srcHeight > reqHeight || srcWidth > reqWidth) {
-            float scaleW = (float) srcWidth / (float) reqWidth;
-            float scaleH = (float) srcHeight / (float) reqHeight;
-
-            float sample = scaleW > scaleH ? scaleW : scaleH;
-            // 只能是2的次幂
-            if (sample < 3)
-                inSampleSize = (int) sample;
-            else if (sample < 6.5)
-                inSampleSize = 4;
-            else if (sample < 8)
-                inSampleSize = 8;
-            else
-                inSampleSize = (int) sample;
-
-        }
-        return inSampleSize;
-    }
+	static int calculateInSampleSize( BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	    int inSampleSize = 1;	//Default subsampling size
+	    // See if image raw height and width is bigger than that of required view
+	    if (options.outHeight > reqHeight || options.outWidth > reqWidth) {
+	    	//bigger
+	        final int halfHeight = options.outHeight / 2;
+	        final int halfWidth = options.outWidth / 2;
+	        // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+	        // height and width larger than the requested height and width.
+	        while ((halfHeight / inSampleSize) > reqHeight
+	                && (halfWidth / inSampleSize) > reqWidth) {
+	            inSampleSize *= 2;
+	        }
+	    }
+	    return inSampleSize;
+	}
 	public static Drawable  formatImage(BitmapDrawable drawable,String imageScale)
 	{
 		if (imageScale.equals("none"))
