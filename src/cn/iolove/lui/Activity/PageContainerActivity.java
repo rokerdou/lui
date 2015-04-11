@@ -128,8 +128,9 @@ public class PageContainerActivity extends FragmentActivity{
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			RuntimeContext.showLuaError(e.getMessage());
 			e.printStackTrace();
+			RuntimeContext.showLuaError(e.getMessage());
+		
 		}
 	}
 	public void pop()
@@ -162,8 +163,9 @@ public class PageContainerActivity extends FragmentActivity{
 			fragmentManger.beginTransaction().setCustomAnimations( R.anim.slide_in_left, R.anim.slide_out_right).replace(0x1237156, fragements,p.getPageName()).commit();
 		} catch (LuaException e) {
 			// TODO Auto-generated catch block
-			RuntimeContext.showLuaError(e.getMessage());
 			e.printStackTrace();
+			RuntimeContext.showLuaError(e.getMessage());
+		
 		}
 		
 

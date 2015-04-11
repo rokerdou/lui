@@ -8,6 +8,7 @@ import cn.iolove.lui.service.LuaService;
 import cn.iolove.lui.service.PageService;
 import android.graphics.Color;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,8 +42,10 @@ public class ButtonWidget extends AbstractWidget {
 			
 			btn.setText(str);
 			
+			
 		}
 		btn.setTextColor(Color.parseColor(((ButtonModel)model).textcolor));
+		btn.setTextSize(TypedValue.COMPLEX_UNIT_DIP, bm.fontsize);
 		
 		if(bm.Onclick!=null)
 		{

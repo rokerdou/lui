@@ -94,8 +94,9 @@ public class LuaHelper {
 		int error = l.LdoString(Utils.loadAssetsString("framework/"+"ui.lua",RuntimeContext.context)+Utils.loadAssetsString("lua/"+pagename+".lua",RuntimeContext.context));
 		if(error!=0)
 		{
-			
+			LOG.i(LuaHelper.class, "LUA½Å±¾¼ÓÔØ³ö´í");
 			throw new LuaException(l.toString(-1));
+		
 
 		}
 		LuaObject obj = (excuteLuaFunction(l,"onCreated",new Object[]{},1))[0];

@@ -84,7 +84,8 @@ public final class WidgetFactory {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			LuaService.getInstance().error();
+			LOG.i(WidgetFactory.class,"Create widget error qNmae  "+ data.getAttrs().get("qName").toString());
+			RuntimeContext.getInstance().showLuaError("无法加载 "+data.getAttrs().get("qName").toString()+"组件");
 			
 			
 			
@@ -122,6 +123,7 @@ public final class WidgetFactory {
 		register("view", cn.iolove.lui.widget.ViewWidget.class, cn.iolove.lui.model.ViewModel.class);
 		register("button", cn.iolove.lui.widget.ButtonWidget.class, cn.iolove.lui.model.ButtonModel.class);
 		register("edittext", cn.iolove.lui.widget.EditTextWidget.class, cn.iolove.lui.model.EditTextModel.class);
+		register("textview", cn.iolove.lui.widget.ViewWidget.class, cn.iolove.lui.model.TextViewModel.class);
 
 	}
 

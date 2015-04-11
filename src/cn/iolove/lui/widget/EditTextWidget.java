@@ -4,8 +4,10 @@ import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.ButtonModel;
 import cn.iolove.lui.model.EditTextModel;
 import cn.iolove.lui.model.UIModel;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,8 @@ public class EditTextWidget extends AbstractWidget {
 			et.setText(str);
 			
 		}
+		et.setTextColor(Color.parseColor(((EditTextModel)model).textcolor));
+		et.setTextSize(TypedValue.COMPLEX_UNIT_DIP, bm.fontsize);
 		et.addTextChangedListener(new TextWatcher() {
 			
 			@Override
