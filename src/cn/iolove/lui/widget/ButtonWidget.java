@@ -6,6 +6,7 @@ import cn.iolove.lui.model.ButtonModel;
 import cn.iolove.lui.model.UIModel;
 import cn.iolove.lui.service.LuaService;
 import cn.iolove.lui.service.PageService;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,9 +38,12 @@ public class ButtonWidget extends AbstractWidget {
 		String str = ((ButtonModel)model).text;
 		if(str!=null)
 		{
+			
 			btn.setText(str);
 			
 		}
+		btn.setTextColor(Color.parseColor(((ButtonModel)model).textcolor));
+		
 		if(bm.Onclick!=null)
 		{
 			btn.setOnClickListener(new OnClickListener() {

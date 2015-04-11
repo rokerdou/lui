@@ -20,6 +20,7 @@
 
 
 ##有问题反馈
+* found  some error not to run project when you import project,please delete lui.jar in libs path.
 在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
 
 * 邮件(dou.roker@gmail.com or tzlhk@qq.com)
