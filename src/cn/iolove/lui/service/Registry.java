@@ -12,31 +12,42 @@ private static Registry obj = new Registry();
 private Registry(){}
 public static Registry getInstance(){return obj;}
 private static  Map ServiceMapping = new HashMap();
+public RegistryAdapter a=null;
+public  interface  RegistryAdapter
+{
+	public void addRegister(Registry r);
+}
+public void  bindAdapter(RegistryAdapter adp)
+{
+	a=adp;
+	
+}
 
-public static void register(String qName)
+public  void registerInlua(String qName)
 {
 	Object obj= ServiceMapping.get(qName);
 	LuaHelper.setGlobalObject(PageService.getInstance().getTopPage().getState(), qName, obj);
 }
-public static void register(String qName,Object obj)
+public  Object register(String qName)
+{
+	Object obj= ServiceMapping.get(qName);
+	return obj;
+
+}
+public  void register(String qName,Object obj)
 {
 	ServiceMapping.put(qName, obj);
 	
 }
-public static void pushServiceInLua()
+public  void pushServiceInLua()
 {
 	register("Registry",getInstance());
-	register("Registry");
+	registerInlua("Registry");
 	register("App",AppSandbox.getInstance());
-	register("App");
+	registerInlua("App");
+	if(a!=null)
+	a.addRegister(obj);
 }
-static
-{
-	register("Registry",getInstance());
-	register("Registry");
-	register("App",AppSandbox.getInstance());
-	register("App");
 
-}
 
 }

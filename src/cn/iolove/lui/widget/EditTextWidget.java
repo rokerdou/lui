@@ -41,6 +41,7 @@ public class EditTextWidget extends AbstractWidget {
 			et.setText(str);
 			
 		}
+		
 		et.setTextColor(Color.parseColor(((EditTextModel)model).textcolor));
 		et.setTextSize(TypedValue.COMPLEX_UNIT_DIP, bm.fontsize);
 		et.addTextChangedListener(new TextWatcher() {

@@ -61,8 +61,9 @@ public class PageService implements PageServiceInterface {
 	public void pushPage(Page obj) {
 		StackPage.push(obj);
 		LuaService.getInstance().init();
-		Registry.pushServiceInLua();
 		Registry.getInstance();
+		Registry.getInstance().pushServiceInLua();
+	
 		
 		
 	}

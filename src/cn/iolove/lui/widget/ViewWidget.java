@@ -36,7 +36,7 @@ public class ViewWidget extends AbstractWidget {
 		
 	}
 
-	private LuiView lv;
+	protected LuiView lv;
 	protected List<AbstractWidget> subitems=new ArrayList<AbstractWidget>();
 	public void _LUA_addChild(LuaObject obj) 
 	{
