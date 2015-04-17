@@ -22,6 +22,17 @@ function view(args)
     end
     return m
 end
+function checkbox(args)
+    local m = {}
+    setmetatable(m, View)
+    m.qName = "checkbox"
+    if args then
+    	for k,v in pairs(args) do
+    		m[k] = v
+    	end
+    end
+    return m
+end
 function edittext(args)
     local m = {}
     m.qName = "edittext"

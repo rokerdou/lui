@@ -124,6 +124,7 @@ public final class WidgetFactory {
 		register("button", cn.iolove.lui.widget.ButtonWidget.class, cn.iolove.lui.model.ButtonModel.class);
 		register("edittext", cn.iolove.lui.widget.EditTextWidget.class, cn.iolove.lui.model.EditTextModel.class);
 		register("textview", cn.iolove.lui.widget.ViewWidget.class, cn.iolove.lui.model.TextViewModel.class);
+		register("checkbox", cn.iolove.lui.widget.CheckBoxWidget.class, cn.iolove.lui.model.CheckBoxModel.class);
 
 	}
 
