@@ -92,6 +92,18 @@ public class ViewWidget extends AbstractWidget {
 		return null;
 		
 	}
+	public void removeAllChild()
+	{
+		int i=0;
+		for(i=0;i<subitems.size();i++)
+		{
+			AbstractWidget child = subitems.get(i);
+			removeChild(child);
+			child.Ondestroy();
+
+			
+		}
+	}
 	public void _LUA_removeChild(final String id)
 	{
 		final AbstractWidget w =findWidget(id);
@@ -116,6 +128,7 @@ public class ViewWidget extends AbstractWidget {
 	{
 		subitems.remove(w);
 		lv.removeView(w.getInnerView());
+		w.Ondestroy();
 		
 		
 	}

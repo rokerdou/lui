@@ -23,6 +23,10 @@ public class ViewModel  extends UIModel{
 		
 		((ViewWidget)widget)._LUA_removeChild(models.id);
 	}
+	public void removaAllChild()
+	{
+		((ViewWidget)widget).removeAllChild();
+	}
 
 
 }
