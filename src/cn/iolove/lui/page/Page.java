@@ -38,7 +38,7 @@ public class Page implements PageCircle {
 	}
 	public void Refresh()
 	{
-		
+		if(root!=null)
 		root.Refresh();
 	}
 	public LuiView getRootView()
