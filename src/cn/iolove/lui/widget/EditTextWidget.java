@@ -6,6 +6,7 @@ import cn.iolove.lui.model.EditTextModel;
 import cn.iolove.lui.model.UIModel;
 import android.graphics.Color;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
@@ -44,6 +45,11 @@ public class EditTextWidget extends AbstractWidget {
 		
 		et.setTextColor(Color.parseColor(((EditTextModel)model).textcolor));
 		et.setTextSize(TypedValue.COMPLEX_UNIT_DIP, bm.fontsize);
+		if(bm.type.equals("password"))
+		{
+			
+		et.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		}
 		et.addTextChangedListener(new TextWatcher() {
 			
 			@Override
