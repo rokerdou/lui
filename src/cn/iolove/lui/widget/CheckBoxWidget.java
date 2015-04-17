@@ -1,8 +1,10 @@
 package cn.iolove.lui.widget;
 
+import cn.iolove.debug.LOG;
 import cn.iolove.lui.context.RuntimeContext;
 import cn.iolove.lui.model.CheckBoxModel;
 import cn.iolove.lui.model.UIModel;
+import cn.iolove.lui.service.LuaService;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -22,8 +24,14 @@ public class CheckBoxWidget extends ViewWidget {
 			
 			@Override
 			public void onClick(View arg0) {
-				cb.setChecked(!mol.Oncheck);
-				mol.Oncheck=!mol.Oncheck;
+				cb.setChecked(!mol.ischeck);
+				mol.ischeck=!mol.ischeck;
+				if(mol.Onclick!=null)
+				{
+					LuaService.getInstance().excuteLuaFunctionCallBack(mol.Onclick, new Object[]{}, 0);
+
+
+				}
 				
 			}
 		});
@@ -45,7 +53,7 @@ public class CheckBoxWidget extends ViewWidget {
 		lv.getBackground().setAlpha(0);
 	
 		if(cb!=null)
-		cb.setChecked(mol.Oncheck);
+		cb.setChecked(mol.ischeck);
 		
 
 	}

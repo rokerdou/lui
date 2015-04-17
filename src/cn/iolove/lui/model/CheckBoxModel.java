@@ -3,18 +3,21 @@ package cn.iolove.lui.model;
 import cn.iolove.domain.LuaData;
 
 public class CheckBoxModel extends UIModel {
-	public boolean Oncheck=false;
+	public boolean ischeck=false;
+	public String Onclick=null;
 
-	public boolean getOncheck() {
-		return Oncheck;
+	public boolean getIscheck() {
+		return ischeck;
 	}
 
-	public void setOncheck(boolean oncheck) {
-		Oncheck = oncheck;
+	public void setIscheck(boolean oncheck) {
+		ischeck = oncheck;
 	}
 
 	public CheckBoxModel(LuaData data) {
 		super(data);
+		if(data.getAttrs().get("Onclick")!=null)  Onclick= (String) (data.getAttrs().get("Onclick"));
+
 		// TODO Auto-generated constructor stub
 	}
 	
