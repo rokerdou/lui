@@ -1,8 +1,9 @@
 package cn.iolove.lui.service;
 
-import org.keplerproject.luajava.LuaObject;
-import org.keplerproject.luajava.LuaState;
 
+
+import cn.iolove.luajava.LuaObject;
+import cn.iolove.luajava.LuaState;
 import cn.iolove.lui.thread.Method;
 import cn.iolove.lui.thread.ThreadFactory;
 

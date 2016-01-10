@@ -1,6 +1,8 @@
 package cn.iolove.lui.widget;
 
-import org.keplerproject.luajava.LuaObject;
+import cn.iolove.luajava.LuaObject;
+
+
 
 public interface UIGroupInterface {
 	public void _LUA_addChild(LuaObject obj) ;

@@ -1,6 +1,8 @@
 package cn.iolove.lui.model.function;
 
-import org.keplerproject.luajava.LuaObject;
+import cn.iolove.luajava.LuaObject;
+
+
 
 public interface LuaModelFucntion {
 
