@@ -6,7 +6,7 @@ a android UI framework that codes android UI by **lua**
   * Set a main.lua file in Asset directory
   * Add lui.jar,lua4java.jar, armeabi\libluajava.so in libs directory
   * finally,codding lua in main.lua
---
+
 ##LuiFramework是什么?
 一个可以用lua脚本编写android APP的业务框架
 
