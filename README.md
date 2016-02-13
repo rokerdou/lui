@@ -1,4 +1,12 @@
-
+## What's LuiFrameWork
+a android UI framework that codes android UI by **lua**
+## How do with LuiFrameWork
+* how to code android app by lui
+  * new Android project,and Let MainActivity inherit cn.iolove.lui.Activity.BootActivity
+  * Set a main.lua file in Asset directory
+  * Add lui.jar,lua4java.jar, armeabi\libluajava.so in libs directory
+  * finally,codding lua in main.lua
+***
 ##LuiFramework是什么?
 一个可以用lua脚本编写android APP的业务框架
 
